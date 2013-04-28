@@ -94,8 +94,10 @@ object Huffman {
   /**
    * Checks whether the list `trees` contains only one single code tree.
    */
-  def singleton(trees: List[CodeTree]): Boolean =
-    trees.length == 1
+  def singleton(trees: List[CodeTree]): Boolean = trees match {
+    case tree :: Nil => true
+    case _ => false
+  }
 
   /**
    * The parameter `trees` of this function is a list of code trees ordered
@@ -109,8 +111,8 @@ object Huffman {
    * If `trees` is a list of less than two elements, that list should be returned
    * unchanged.
    */
-  def combine(trees: List[CodeTree]): List[CodeTree] = 
-    if ( trees.length < 2) trees
+  def combine(trees: List[CodeTree]): List[CodeTree] =
+    if ( trees.length <= 2) trees
     else Fork(trees(0) , trees(1) , chars(trees(0)) ::: chars(trees(1)), weight(trees(0)) + weight(trees(1))) :: trees.tail.tail
   
 
@@ -142,7 +144,7 @@ object Huffman {
    * frequencies from that text and creates a code tree based on them.
    */
   def createCodeTree(chars: List[Char]): CodeTree =
-    until(singleton, combine)(makeOrderedLeafList(times(chars)))
+    until(singleton, combine )(makeOrderedLeafList(times(chars)))
 
 
 
