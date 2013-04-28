@@ -45,7 +45,7 @@ class HuffmanSuite extends FunSuite {
       assert(decode(t1, encode(t1)("ab".toList)) === "ab".toList)
     }
   }
-  /*
+  
   test("createCodeTree.test.small ") {
     val text = "CodeTree"
     val tree: CodeTree = createCodeTree(text.toList)
@@ -73,6 +73,5 @@ class HuffmanSuite extends FunSuite {
     assert(enc1 === enc2)
     assert(enc1.length === bitCount)
   }
-  * 
-  */
+
 }

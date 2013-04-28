@@ -110,8 +110,8 @@ object Huffman {
    * unchanged.
    */
   def combine(trees: List[CodeTree]): List[CodeTree] = {
-    if ( trees.length < 2) trees
-    else new Fork(trees(0) , trees(1) , chars(trees(0)) ::: chars(trees(1)), weight(trees(0)) + weight(trees(1))) :: trees.tail.tail
+    if ( trees.length < 2) trees.sortWith(weight(_) < weight(_))
+    else (Fork(trees(0) , trees(1) , chars(trees(0)) ::: chars(trees(1)), weight(trees(0)) + weight(trees(1))) :: trees.tail.tail).sortWith(weight(_) < weight(_))
   }
 
   /**
